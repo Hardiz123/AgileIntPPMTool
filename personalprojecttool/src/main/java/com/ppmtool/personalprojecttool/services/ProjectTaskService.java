@@ -1,5 +1,7 @@
 package com.ppmtool.personalprojecttool.services;
 
+import javax.validation.Valid;
+
 import com.ppmtool.personalprojecttool.domain.Backlog;
 import com.ppmtool.personalprojecttool.domain.Project;
 import com.ppmtool.personalprojecttool.domain.ProjectTask;
@@ -90,6 +92,22 @@ public class ProjectTaskService {
         }
 
         return projectTask;
+    }
+
+    public ProjectTask updateByProjectSequence(ProjectTask updatedTask, String backlog_id, String pt_id) {
+        ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id);
+
+        projectTask = updatedTask;
+
+        return projectTaskRepository.save(projectTask);
+    }
+
+    public void deletePTByProjectSequence(String backlog_id, String pt_id) {
+        ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id);
+
+
+
+        projectTaskRepository.delete(projectTask);
     }
 
 }
